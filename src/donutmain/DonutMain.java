@@ -12,8 +12,8 @@ public class DonutMain {
     double theta_spacing = .1;
     double phi_spacing = .05;
 
-    double r1 = 1;
-    double r2 = 2;
+    double r1 = 2;
+    double r2 = 0;
     double k2 = 5;
     double k1 = (screen_height * k2 * 3 / (8 * (r1 + r2)));
 
@@ -54,9 +54,9 @@ public class DonutMain {
                 int yp = (int) (screen_height / 2 - k1 * ooz * y);
 
                 
-                double L = cosphi * costheta * sinB - cosA * costheta * sinphi - sinA * sintheta + cosB * (cosA * sintheta - costheta * sinA * sinphi);
+                //double L = cosphi * costheta * sinB - cosA * costheta * sinphi - sinA * sintheta + cosB * (cosA * sintheta - costheta * sinA * sinphi);
                 //double L = costheta * (-cosphi*sinB + sinA*cosB*sinphi - cosA*sinphi)+ sintheta * (-cosA*cosB - sinA);
-                //double L = -sinC*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + cosC*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - (costheta*cosA*sinphi+sintheta*sinA);
+                double L = -sinC*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + cosC*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - (costheta*cosA*sinphi+sintheta*sinA);
                 //double L = 0*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + 0*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - 1*(costheta*cosA*sinphi+sintheta*sinA);
 
                 if (L > 0 && outOfBounds(xp, yp)) {
