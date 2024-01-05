@@ -12,12 +12,12 @@ public class DonutMain {
     double theta_spacing = .1;
     double phi_spacing = .05;
 
-    double r1 = 1;
-    double r2 = 2;
+    double r1 = 2;
+    double r2 = 3;
     double k2 = 5;
     double k1 = (screen_height * k2 * 3 / (8 * (r1 + r2)));
 
-    static int screen_height = 30;
+    static int screen_height = 50;
     static int screen_width = 100;
 
     public void render_frame(double A, double B, double C) {
@@ -35,11 +35,11 @@ public class DonutMain {
             Arrays.fill(row, 0.0);
         }
 
-        for (double theta = 0; theta < 2 * pi; theta += theta_spacing) {
+        for (double theta = 0; theta < 2 * 2.5; theta += theta_spacing) {
             double costheta = Math.cos(theta), sintheta = Math.sin(theta);
             // System.out.println(testctr++);
 
-            for (double phi = 0; phi < 2 * pi; phi += phi_spacing) {
+            for (double phi = 0; phi < 2 * 2; phi += phi_spacing) {
                 double cosphi = Math.cos(phi), sinphi = Math.sin(phi);
 
                 double circlex = r2 + r1 * costheta;
@@ -54,13 +54,14 @@ public class DonutMain {
                 int yp = (int) (screen_height / 2 - k1 * ooz * y);
 
                 
-                //double L = cosphi * costheta * sinB - cosA * costheta * sinphi - sinA * sintheta + cosB * (cosA * sintheta - costheta * sinA * sinphi);
+                double L = cosphi * costheta * sinB - cosA * costheta * sinphi - sinA * sintheta + cosB * (cosA * sintheta - costheta * sinA * sinphi);
                 //double L = costheta * (-cosphi*sinB + sinA*cosB*sinphi - cosA*sinphi)+ sintheta * (-cosA*cosB - sinA);
-                double L = -sinC*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + cosC*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - (costheta*cosA*sinphi+sintheta*sinA);
+                //double L = -sinC*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + cosC*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - (costheta*cosA*sinphi+sintheta*sinA);
                 //double L = 0*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + 0*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - 1*(costheta*cosA*sinphi+sintheta*sinA);
 
-                if (L > 0 && outOfBounds(xp, yp)) {
+                if ( outOfBounds(xp, yp)) {
 
+                   L = Math.abs(L); 
                     if (ooz > zbuffer[xp][yp]) {
                         zbuffer[xp][yp] = ooz;
                         int luminance_index = (int) (L * 8);
@@ -112,8 +113,8 @@ public class DonutMain {
 
             ClearConsole();
             dd.render_frame(a, b, c);
-            a = 5;
-            b = 3;
+            a += 0.07;
+            b += 0.07;
             c += 0.05;
             
             Thread.sleep(30);
