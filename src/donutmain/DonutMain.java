@@ -12,8 +12,8 @@ public class DonutMain {
     double theta_spacing = .1;
     double phi_spacing = .05;
 
-    double r1 = 2;
-    double r2 = 0;
+    double r1 = 1;
+    double r2 = 2;
     double k2 = 5;
     double k1 = (screen_height * k2 * 3 / (8 * (r1 + r2)));
 
@@ -112,8 +112,8 @@ public class DonutMain {
 
             ClearConsole();
             dd.render_frame(a, b, c);
-            a += 0.07;
-            b += 0.07;
+            a = 5;
+            b = 3;
             c += 0.05;
             
             Thread.sleep(30);
