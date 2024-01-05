@@ -20,9 +20,10 @@ public class DonutMain {
     static int screen_height = 30;
     static int screen_width = 100;
 
-    public void render_frame(double A, double B) {
+    public void render_frame(double A, double B, double C) {
         double cosA = Math.cos(A), sinA = Math.sin(A);
         double cosB = Math.cos(B), sinB = Math.sin(B);
+        double cosC = Math.cos(C), sinC = Math.sin(C);
 
         char[][] output = new char[screen_width][screen_height];
         for (char[] row : output) {
@@ -52,10 +53,11 @@ public class DonutMain {
                 int xp = (int) (screen_width / 2 + k1 * ooz * x);
                 int yp = (int) (screen_height / 2 - k1 * ooz * y);
 
-                //test
-                //double L = cosphi * costheta * sinB - cosA * costheta * sinphi - sinA * sintheta + cosB * (cosA * sintheta - costheta * sinA * sinphi);
+                
+                double L = cosphi * costheta * sinB - cosA * costheta * sinphi - sinA * sintheta + cosB * (cosA * sintheta - costheta * sinA * sinphi);
                 //double L = costheta * (-cosphi*sinB + sinA*cosB*sinphi - cosA*sinphi)+ sintheta * (-cosA*cosB - sinA);
-                double L = -sinB*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + cosB*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - (costheta*cosA*sinphi+sintheta*sinA);
+                //double L = -sinC*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + cosC*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - (costheta*cosA*sinphi+sintheta*sinA);
+                //double L = 0*(costheta*(cosB*cosphi + sinA*sinB*sinphi)-sintheta*cosA*sinB) + 0*(costheta*(cosphi*sinB-sinA*cosB*sinphi)+sintheta*cosA*cosB) - 1*(costheta*cosA*sinphi+sintheta*sinA);
 
                 if (L > 0 && outOfBounds(xp, yp)) {
 
@@ -105,13 +107,14 @@ public class DonutMain {
 
     public static void main(String[] args) throws InterruptedException {
         DonutMain dd = new DonutMain();
-        double a = 0, b = 0;
+        double a = 0, b = 0, c=0;
         for (int i = 0; i >= 0; i++) {
 
             ClearConsole();
-            dd.render_frame(a, b);
+            dd.render_frame(a, b, c);
             a += 0.07;
             b += 0.07;
+            c += 0.05;
             
             Thread.sleep(30);
         }
